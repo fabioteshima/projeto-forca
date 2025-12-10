@@ -1,12 +1,14 @@
 package aplicacao;
 
 import entidades.LetraForca;
+import entidades.PalavraForca;
 
 public class JogoDaForca {
 
     public static void main (String[] args){
 
-        LetraForca letra = new LetraForca('A', 2);
-        System.out.println(letra);
+        PalavraForca palavra = new PalavraForca("casa");
+        palavra.preparaForca();
+        System.out.println(palavra.toString());
     }
 }
