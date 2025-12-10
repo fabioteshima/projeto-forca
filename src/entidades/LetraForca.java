@@ -14,16 +14,8 @@ public class LetraForca {
         return posicao;
     }
 
-    public void setPosicao(int posicao) {
-        this.posicao = posicao;
-    }
-
     public char getLetra() {
         return letra;
-    }
-
-    public void setLetra(char letra) {
-        this.letra = letra;
     }
 
     @Override

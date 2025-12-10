@@ -12,6 +12,10 @@ public class PalavraForca {
         this.palavraForca = palavraForca.toUpperCase();
     }
 
+    public List<LetraForca> getListaLetras() {
+        return listaLetras;
+    }
+
     public void preparaForca(){
         char[] letras = palavraForca.toCharArray();
         for(int i = 0; i < letras.length; i++){
