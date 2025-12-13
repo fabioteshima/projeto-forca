@@ -10,18 +10,38 @@ public class Programa {
 
         Scanner sc = new Scanner(System.in);
 
+        Console.msgBoasVindas();
+
         System.out.print("Digite uma palavra: ");
         String palavraEntrada = sc.nextLine();
         PalavraForca palavra = new PalavraForca(palavraEntrada);
 
         palavra.preparaForca();
+        Console.mostraForca(palavra);
 
         System.out.print("Digite uma letra: ");
         char letra = sc.next().charAt(0);
-
         palavra.atualizaForca(letra);
+        Console.mostraForca(palavra);
+        if(palavra.conferePalavra()==true) System.out.println("Acertou");
+        else System.out.println("Faltam");
 
+        System.out.print("Digite uma letra: ");
+        letra = sc.next().charAt(0);
+        palavra.atualizaForca(letra);
+        Console.mostraForca(palavra);
+        if(palavra.conferePalavra()==true) System.out.println("Acertou");
+        else System.out.println("Faltam");
+
+        System.out.print("Digite uma letra: ");
+        letra = sc.next().charAt(0);
+        palavra.atualizaForca(letra);
         Console.mostraForca(palavra); // mostra as letras e suas posições pela inteface
+        if(palavra.conferePalavra()==true) System.out.println("Acertou");
+        else System.out.println("Faltam");
+
+        Console.msgFimJogo();
+
 
     }
 }

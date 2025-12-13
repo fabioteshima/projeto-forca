@@ -12,5 +12,15 @@ public class Console {
         }
         System.out.println();
     }
+
+    public static void msgBoasVindas(){
+        System.out.println();
+        System.out.println("BEM VINDO AO JOGO DA FORCA!");
+        System.out.println();
+    }
+
+    public static void msgFimJogo(){
+       System.out.println("O JOGO TERMINOU! THANK YOU FOR PLAYING!");
+    }
 }
 

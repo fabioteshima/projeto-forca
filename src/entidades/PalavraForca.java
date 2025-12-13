@@ -2,16 +2,18 @@ package entidades;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class PalavraForca {
 
-    private String palavraForca;
-    private List<LetraForca> listaLetras = new ArrayList<>();
+    private final String palavraForca;
+    private List<LetraForca> listaLetras;
     private char[] letrasDescobertas;
+    private Integer numLetrasDescobertas;
 
     public PalavraForca(String palavraForca){
         this.palavraForca = palavraForca.toUpperCase();
+        listaLetras = new ArrayList<>();
+        numLetrasDescobertas = 0;
     }
 
     public List<LetraForca> getListaLetras() {
@@ -20,6 +22,10 @@ public class PalavraForca {
 
     public char[] getLetrasDescobertas() {
         return letrasDescobertas;
+    }
+
+    public int getNumLetrasDescobertas(){
+        return numLetrasDescobertas;
     }
 
     public void preparaForca(){
@@ -31,25 +37,29 @@ public class PalavraForca {
         }
     }
 
-    public List<LetraForca> verificaLetra(char letra){
-        List<LetraForca> list = new ArrayList<>();
-        for(int i = 0; i < listaLetras.size(); i++){
-            if(listaLetras.get(i).getLetra() == letra){
-                list.add(new LetraForca(listaLetras.get(i).getLetra(), i));
+    private List<LetraForca> verificaLetra(char letra){
+        List<LetraForca> listaLetrasVerificadas = new ArrayList<>();
+        LetraForca letraForca = null;
+        for (int i = 0; i < listaLetras.size(); i++) {
+            letraForca = listaLetras.get(i);
+            if (letraForca.getLetra() == letra) {
+                listaLetrasVerificadas.add(letraForca);
+                numLetrasDescobertas++;
             }
         }
-        return list;
+        return listaLetrasVerificadas;
     }
 
-    public boolean atualizaForca(char letra){
+    public void atualizaForca(char letra){
         List<LetraForca> listaLetras = verificaLetra(Character.toUpperCase(letra));
-        if (listaLetras.isEmpty()) {
-            return false;
-        }
         for (LetraForca letraForca : listaLetras) {
             letrasDescobertas[letraForca.getPosicao()] = letraForca.getLetra();
         }
-        return true;
+    }
+
+    public boolean conferePalavra(){
+        if (numLetrasDescobertas == listaLetras.size()) return true;
+        else return false;
     }
 
     @Override
