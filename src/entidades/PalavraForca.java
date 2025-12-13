@@ -8,7 +8,7 @@ public class PalavraForca {
     private final String palavraForca;
     private List<LetraForca> listaLetras;
     private char[] letrasDescobertas;
-    private Integer numLetrasDescobertas;
+    private int numLetrasDescobertas;
 
     public PalavraForca(String palavraForca){
         this.palavraForca = palavraForca.toUpperCase();
@@ -28,7 +28,7 @@ public class PalavraForca {
         return numLetrasDescobertas;
     }
 
-    public void preparaForca(){
+    public void prepararForca(){
         char[] letras = palavraForca.toCharArray();
         letrasDescobertas = new char[letras.length];
         for(int i = 0; i < letras.length; i++){
@@ -37,27 +37,22 @@ public class PalavraForca {
         }
     }
 
-    private List<LetraForca> verificaLetra(char letra){
-        List<LetraForca> listaLetrasVerificadas = new ArrayList<>();
-        LetraForca letraForca = null;
-        for (int i = 0; i < listaLetras.size(); i++) {
-            letraForca = listaLetras.get(i);
+    public boolean atualizarForca(char letra) {
+        letra = Character.toUpperCase(letra);
+        boolean encontrou = false;
+        for (LetraForca letraForca : listaLetras) {
             if (letraForca.getLetra() == letra) {
-                listaLetrasVerificadas.add(letraForca);
-                numLetrasDescobertas++;
+                if (letrasDescobertas[letraForca.getPosicao()] == '_') {
+                    letrasDescobertas[letraForca.getPosicao()] = letraForca.getLetra();
+                    numLetrasDescobertas++;
+                }
+                encontrou = true;
             }
         }
-        return listaLetrasVerificadas;
+        return encontrou;
     }
 
-    public void atualizaForca(char letra){
-        List<LetraForca> listaLetras = verificaLetra(Character.toUpperCase(letra));
-        for (LetraForca letraForca : listaLetras) {
-            letrasDescobertas[letraForca.getPosicao()] = letraForca.getLetra();
-        }
-    }
-
-    public boolean conferePalavra(){
+    public boolean verificarSePalavraCompleta(){
         if (numLetrasDescobertas == listaLetras.size()) return true;
         else return false;
     }

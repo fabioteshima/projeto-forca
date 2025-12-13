@@ -1,5 +1,6 @@
 package aplicacao;
 
+import entidades.Jogador;
 import entidades.PalavraForca;
 
 import java.util.Scanner;
@@ -10,38 +11,38 @@ public class Programa {
 
         Scanner sc = new Scanner(System.in);
 
-        Console.msgBoasVindas();
+        Jogador jogador = new Jogador();
+        String palavraEntrada;
+
+        ConsoleForca.msgBoasVindas();
 
         System.out.print("Digite uma palavra: ");
-        String palavraEntrada = sc.nextLine();
-        PalavraForca palavra = new PalavraForca(palavraEntrada);
+        palavraEntrada = sc.nextLine();
+        PalavraForca palavraForca = new PalavraForca(palavraEntrada);
 
-        palavra.preparaForca();
-        Console.mostraForca(palavra);
+        palavraForca.prepararForca();
+        ConsoleForca.mostrarForca(palavraForca);
+        ConsoleForca.mostrarStatusJogador(jogador);
 
-        System.out.print("Digite uma letra: ");
-        char letra = sc.next().charAt(0);
-        palavra.atualizaForca(letra);
-        Console.mostraForca(palavra);
-        if(palavra.conferePalavra()==true) System.out.println("Acertou");
-        else System.out.println("Faltam");
+        while(!palavraForca.verificarSePalavraCompleta()) {
+            System.out.print("Digite uma letra: ");
+            char letra = sc.next().charAt(0);
+            if(palavraForca.atualizarForca(letra) == true){
+                jogador.somaPontos();
+                ConsoleForca.msgAcertou(letra);
+            }
+            else{
+                jogador.diminuiTentativas();
+                ConsoleForca.msgNaoAcertou(letra);
+            }
 
-        System.out.print("Digite uma letra: ");
-        letra = sc.next().charAt(0);
-        palavra.atualizaForca(letra);
-        Console.mostraForca(palavra);
-        if(palavra.conferePalavra()==true) System.out.println("Acertou");
-        else System.out.println("Faltam");
+            ConsoleForca.mostrarForca(palavraForca); // mostra as letras e suas posições pela inteface
+            ConsoleForca.mostrarStatusJogador(jogador);
+        }
 
-        System.out.print("Digite uma letra: ");
-        letra = sc.next().charAt(0);
-        palavra.atualizaForca(letra);
-        Console.mostraForca(palavra); // mostra as letras e suas posições pela inteface
-        if(palavra.conferePalavra()==true) System.out.println("Acertou");
-        else System.out.println("Faltam");
+        ConsoleForca.msgFimJogo();
 
-        Console.msgFimJogo();
-
+        sc.close();
 
     }
 }
