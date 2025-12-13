@@ -2,12 +2,20 @@ package entidades;
 
 public class Jogador {
 
+    private int numeroJogador;
     private int tentativas;
     private int pontos;
+    private Boolean turno;
 
-    public Jogador(){
-        this.tentativas = 6;
+    public Jogador(int numeroJogador, boolean turno){
+        this.numeroJogador = numeroJogador;
+        this.tentativas = 4;
         this.pontos = 0;
+        this.turno = turno;
+    }
+
+    public int getNumeroJogador() {
+        return numeroJogador;
     }
 
     public int getTentativas() {
@@ -16,6 +24,13 @@ public class Jogador {
 
     public int getPontos() {
         return pontos;
+    }
+    public Boolean getTurno() {
+        return turno;
+    }
+
+    public void setTurno(Boolean turno) {
+        this.turno = turno;
     }
 
     public void somaPontos(){
