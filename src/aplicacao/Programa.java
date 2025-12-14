@@ -16,22 +16,24 @@ public class Programa {
         Jogador jogador2 = new Jogador(2,false);
 
         ConsoleForca.msgBoasVindas();
+
         ConsoleForca.msgIstrucao();
 
-        System.out.print("Digite uma palavra para o jogo: ");
+        ConsoleForca.msgDigitarPalavra();
         palavraEntrada = sc.nextLine();
         PalavraForca palavraForca = new PalavraForca(palavraEntrada);
         palavraForca.prepararForca();
 
-        System.out.println("Palavra de " + palavraForca.getListaLetras().size() + " letras registrada!\n");
+        ConsoleForca.msgPalavraRegistrada(palavraForca);
+        System.out.println();
+
         ConsoleForca.mostrarForca(palavraForca);
-        ConsoleForca.mostrarStatusJogador(jogador1);
-        ConsoleForca.mostrarStatusJogador(jogador2);
+        ConsoleForca.mostrarPlacar(jogador1, jogador2);
         System.out.println();
 
         while(!palavraForca.verificarSePalavraCompleta() && jogador1.getTentativas() > 0 && jogador2.getTentativas() > 0) {
             if(jogador1.getTurno() == true){
-                System.out.print("Digite uma letra JOGADOR #" + jogador1.getNumeroJogador() + ": ");
+                ConsoleForca.msgDigitarLetra(jogador1);
                 char letra = sc.next().charAt(0);
                 System.out.println();
                 if(palavraForca.atualizarForca(letra) == true){
@@ -48,7 +50,7 @@ public class Programa {
                 }
             }
             else if (jogador2.getTurno() == true){
-                System.out.print("Digite uma letra JOGADOR #" + jogador2.getNumeroJogador() + ": ");
+                ConsoleForca.msgDigitarLetra(jogador2);
                 char letra = sc.next().charAt(0);
                 System.out.println();
                 if(palavraForca.atualizarForca(letra) == true){
@@ -65,31 +67,35 @@ public class Programa {
                 }
             }
 
-            ConsoleForca.mostrarForca(palavraForca);
-            ConsoleForca.mostrarStatusJogador(jogador1);
-            ConsoleForca.mostrarStatusJogador(jogador2);
+           ConsoleForca.mostrarForca(palavraForca);
+           ConsoleForca.mostrarPlacar(jogador1, jogador2);
             System.out.println();
         }
 
-        if(palavraForca.verificarSePalavraCompleta()){ // Termina o jogo se a palavra foi completada
+        if(palavraForca.verificarSePalavraCompleta()) { // Termina o jogo se a palavra foi completada
             if(jogador1.getPontos() > jogador2.getPontos()){
-                ConsoleForca.msgVenceu(jogador1);
+                ConsoleForca.msgVitoria(jogador1);
+                ConsoleForca.msgPlacarFinal(jogador1, jogador2);
             }
             else if ((jogador1.getPontos() < jogador2.getPontos())){
-                ConsoleForca.msgVenceu(jogador2);
+                ConsoleForca.msgVitoria(jogador2);
+                ConsoleForca.msgPlacarFinal(jogador1, jogador2);
             }
             else{
                 ConsoleForca.msgEmpate();
+                ConsoleForca.msgPlacarFinal(jogador1, jogador2);
             }
         }
         else if (jogador1.getTentativas() <= 0 || jogador2.getTentativas() <= 0) { // Termina se acabaram as tentativas
             if (jogador1.getPontos() > jogador2.getPontos()) {
-                ConsoleForca.msgVenceu(jogador1);
+                ConsoleForca.msgVitoria(jogador1);
+                ConsoleForca.msgPlacarFinal(jogador1, jogador2);
             } else if ((jogador1.getPontos() < jogador2.getPontos())) {
-                ConsoleForca.msgVenceu(jogador2);
+                ConsoleForca.msgVitoria(jogador2);
+                ConsoleForca.msgPlacarFinal(jogador1, jogador2);
             } else {
                 ConsoleForca.msgEmpate();
-
+                ConsoleForca.msgPlacarFinal(jogador1, jogador2);
             }
         }
 
