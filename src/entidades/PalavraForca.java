@@ -28,6 +28,17 @@ public class PalavraForca {
         return numLetrasDescobertas;
     }
 
+    public boolean verificarLetra(char letra){
+        letra = Character.toUpperCase(letra);
+        boolean encontrou = false;
+        for(char c : getLetrasDescobertas()){
+            if (c == letra) {
+                encontrou = true;
+            }
+        }
+        return encontrou;
+    }
+
     public void prepararForca(){
         char[] letras = palavraForca.toCharArray();
         letrasDescobertas = new char[letras.length];

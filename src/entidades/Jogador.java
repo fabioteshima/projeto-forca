@@ -25,6 +25,7 @@ public class Jogador {
     public int getPontos() {
         return pontos;
     }
+
     public Boolean getTurno() {
         return turno;
     }
