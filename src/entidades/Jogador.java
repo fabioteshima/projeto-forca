@@ -9,7 +9,7 @@ public class Jogador {
 
     public Jogador(int numeroJogador, boolean turno){
         this.numeroJogador = numeroJogador;
-        this.tentativas = 4;
+        this.tentativas = 6;
         this.pontos = 0;
         this.turno = turno;
     }

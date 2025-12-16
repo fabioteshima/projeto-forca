@@ -80,5 +80,8 @@ public class ConsoleForca {
         System.out.printf("JOGADOR #%d : %d ponto(s) / Tentativas restantes %d \n",
                             jogador2.getNumeroJogador(), jogador2.getPontos(), jogador2.getTentativas());
     }
+     public static void mostrarPalavraCompleta(PalavraForca palavraForca){
+         System.out.println("A palavra era \"" + palavraForca.getPalavraForca() + "\"");
+     }
 }
 

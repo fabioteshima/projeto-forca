@@ -16,6 +16,10 @@ public class PalavraForca {
         numLetrasDescobertas = 0;
     }
 
+    public String getPalavraForca(){
+        return "" + palavraForca;
+    }
+
     public List<LetraForca> getListaLetras() {
         return listaLetras;
     }
