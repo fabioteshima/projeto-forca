@@ -21,6 +21,14 @@ public class ConsoleForca {
         System.out.println("QUANDO A PALAVRA FOR DESCOBERTA OU CASO ACABEM OS NÚMEROS DE TENTATIVAS.\n");
     }
 
+    public static void msgDesejaJogar (){
+        System.out.print("Deseja jogar (s/n)?: ");
+    }
+
+    public static void msgDesejaContinuar (){
+        System.out.print("Deseja jogar novamente (s/n)?: ");
+    }
+
     public static void msgDigitarPalavra(){
         System.out.print("Digite uma palavra para o jogo: ");
     }
@@ -56,7 +64,6 @@ public class ConsoleForca {
     public static void msgPlacarFinal(Jogador jogador1, Jogador jogador2){
         System.out.println("PLACAR FINAL: ");
         mostrarPlacar(jogador1, jogador2);
-
     }
 
    public static void mostrarForca(PalavraForca palavraForca){

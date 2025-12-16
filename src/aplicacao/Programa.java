@@ -20,17 +20,17 @@ public class Programa {
         ConsoleForca.msgBoasVindas();
         ConsoleForca.msgIstrucao();
 
-        System.out.print("Deseja jogar (s/n)? ");
+        /* Inicio do jogo */
+        ConsoleForca.msgDesejaJogar(); // Mensagem se deseja jogar
         char jogar = sc.next().charAt(0);
         sc.nextLine();
-
         while(jogar == 's' || jogar == 'S'){
+            /* Instancia jogadores */
             jogador1 = new Jogador(1, true);
             jogador2 = new Jogador(2, false);
-
             System.out.println();
-            ConsoleForca.msgDigitarPalavra();
-
+            /* Entrada da palavra */
+            ConsoleForca.msgDigitarPalavra(); // Mensagem para digitar a palavra
             Console cs = System.console();
             if (cs != null) {                       // Para usar no Console (Prompt) ou Scanner (IDE)
                 char[] senha = cs.readPassword();
@@ -38,23 +38,23 @@ public class Programa {
             } else {
                 palavraEntrada = sc.nextLine();
             }
-
+            /* Instancia palavraForca e prepara a forca */
             PalavraForca palavraForca = new PalavraForca(palavraEntrada);
             palavraForca.prepararForca();
-
-            ConsoleForca.msgPalavraRegistrada(palavraForca);
+            ConsoleForca.msgPalavraRegistrada(palavraForca);  // Mensagem de palavra registrada
             System.out.println();
-
+            /* Mostra forca e placar */
             ConsoleForca.mostrarForca(palavraForca);
             ConsoleForca.mostrarPlacar(jogador1, jogador2);
             System.out.println();
-
-            /* Sistema jogo */
+            /* Sistema do jogo */
             while(!palavraForca.verificarSePalavraCompleta() && jogador1.getTentativas() >= 0 && jogador2.getTentativas() > 0) {
+                /* Turno jogador #1 */
                 if(jogador1.getTurno() == true){
                     char letra;
+                    /* Verifica se a letra já foi descoberta */
                     do{
-                        ConsoleForca.msgDigitarLetra(jogador1);
+                        ConsoleForca.msgDigitarLetra(jogador1); // Mensagem para o jogador digitar a letra
                         letra = sc.next().charAt(0);
                         System.out.println();
                         if(palavraForca.verificarLetra(letra)) {
@@ -65,7 +65,7 @@ public class Programa {
                             System.out.println();
                         }
                     }while(palavraForca.verificarLetra(letra));
-
+                    /* Se acertou a letra atualiza a forca e soma pontos, se não não atualiza e tira tentativa do jogador */
                     if(palavraForca.atualizarForca(letra)){
                         jogador1.somaPontos();
                         ConsoleForca.msgAcertou(letra);
@@ -79,6 +79,7 @@ public class Programa {
                         System.out.println();
                     }
                 }
+                /* Turno jogador #2 */
                 else if (jogador2.getTurno() == true){
                     char letra;
                     do{
@@ -107,30 +108,31 @@ public class Programa {
                         System.out.println();
                     }
                 }
+                /* Mostra forca e placar a cada jogada */
                 ConsoleForca.mostrarForca(palavraForca);
                 ConsoleForca.mostrarPlacar(jogador1, jogador2);
                 System.out.println();
             }
-            /* Verifica vencedor */
-            if(palavraForca.verificarSePalavraCompleta() || jogador1.getTentativas() <= 0 || jogador2.getTentativas() <= 0) {
-                if(jogador1.getPontos() > jogador2.getPontos()){
-                    ConsoleForca.msgVitoria(jogador1);
-                    ConsoleForca.msgPlacarFinal(jogador1, jogador2);
-                }
-                else if ((jogador1.getPontos() < jogador2.getPontos())){
-                    ConsoleForca.msgVitoria(jogador2);
-                    ConsoleForca.msgPlacarFinal(jogador1, jogador2);
-                }
-                else{
-                    ConsoleForca.msgEmpate();
-                    ConsoleForca.msgPlacarFinal(jogador1, jogador2);
-                }
+            /* Verifica vencedor e mosta mensagem de vitória e placar final */
+            if(jogador1.getPontos() > jogador2.getPontos()){
+                ConsoleForca.msgVitoria(jogador1);
+                ConsoleForca.msgPlacarFinal(jogador1, jogador2);
+            }
+            else if ((jogador1.getPontos() < jogador2.getPontos())){
+                ConsoleForca.msgVitoria(jogador2);
+                ConsoleForca.msgPlacarFinal(jogador1, jogador2);
+            }
+            else{
+                 ConsoleForca.msgEmpate();
+                 ConsoleForca.msgPlacarFinal(jogador1, jogador2);
             }
             System.out.println();
-            System.out.print("Deseja jogar novamente (s/n): ");
+            /* Questiona se deseja jogar novamente */
+            ConsoleForca.msgDesejaContinuar();
             jogar = sc.next().charAt(0);
             sc.nextLine();
         }
+        /* Finaliza o jogo */
         ConsoleForca.msgFimJogo();
         sc.close();
     }
